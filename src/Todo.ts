@@ -6,6 +6,7 @@ export default class Todo {
   private _description: string;
   private _dueDate: string;
   private _priority: Priority;
+
   constructor(
     checked: boolean,
     title: string,
@@ -23,31 +24,40 @@ export default class Todo {
   public get checked(): boolean {
     return this._checked;
   }
-  public set checked(value: boolean) {
-    this._checked = value;
+
+  public set checked(checked: boolean) {
+    this._checked = checked;
   }
+
   public get title(): string {
     return this._title;
   }
-  public set title(value: string) {
-    this._title = value;
+
+  public set title(title: string) {
+    this._title = title;
   }
+
   public get description(): string {
     return this._description;
   }
-  public set description(value: string) {
-    this._description = value;
+
+  public set description(description: string) {
+    this._description = description;
   }
+
   public get dueDate(): string {
     return this._dueDate;
   }
-  public set dueDate(value: string) {
-    this._dueDate = value;
+
+  public set dueDate(dueDate: string) {
+    this._dueDate = dueDate;
   }
-  public get priority(): number {
+
+  public get priority(): Priority {
     return this._priority;
   }
-  public set priority(value: number) {
-    this._priority = value;
+
+  public set priority(priority: Priority) {
+    this._priority = priority;
   }
 }

@@ -1,4 +1,4 @@
-import Todo from "./todo";
+import Todo from "./Todo";
 
 export default class TodoList {
   private _todoItems: Todo[];
@@ -6,11 +6,11 @@ export default class TodoList {
   constructor(todoItems: Todo[]) {
     this._todoItems = todoItems;
   }
-
   public get todoItems(): Todo[] {
     return this._todoItems;
   }
-  public set todoItems(value: Todo[]) {
-    this._todoItems = value;
+
+  public set todoItems(todoItems: Todo[]) {
+    this._todoItems = todoItems;
   }
 }
