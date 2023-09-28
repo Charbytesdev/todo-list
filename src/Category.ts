@@ -1,11 +1,19 @@
 import TodoList from "./TodoList";
 
-export default class Category {
-  private _todoList: TodoList;
+export default abstract class Category {
   private _name: string;
+  private _todoList: TodoList;
 
   constructor(todoList: TodoList, name: string) {
     this._todoList = todoList;
+    this._name = name;
+  }
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public set name(name: string) {
     this._name = name;
   }
 
@@ -15,13 +23,5 @@ export default class Category {
 
   public set todoList(todoList: TodoList) {
     this._todoList = todoList;
-  }
-
-  public get name(): string {
-    return this._name;
-  }
-
-  public set name(name: string) {
-    this._name = name;
   }
 }
