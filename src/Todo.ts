@@ -1,4 +1,4 @@
-export default class BaseToDo {
+export default class Todo {
   private _checked: boolean;
   private _title: string;
   private _description: string;
