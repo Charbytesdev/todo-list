@@ -1,15 +1,17 @@
+type Priority = "low" | "medium" | "high";
+
 export default class Todo {
   private _checked: boolean;
   private _title: string;
   private _description: string;
   private _dueDate: string;
-  private _priority: number;
+  private _priority: Priority;
   constructor(
     checked: boolean,
     title: string,
     description: string,
     dueDate: string,
-    priority: number
+    priority: Priority
   ) {
     this._checked = checked;
     this._title = title;
