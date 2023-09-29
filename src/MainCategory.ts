@@ -1,7 +1,7 @@
 import Category from "./Category";
 import TodoList from "./TodoList";
 
-export default class Project extends Category {
+export default class MainCategory extends Category {
   private _description: string;
 
   constructor(name: string, todoList: TodoList, description: string) {
