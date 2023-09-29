@@ -4,9 +4,9 @@ export default abstract class Category {
   private _name: string;
   private _todoList: TodoList;
 
-  constructor(todoList: TodoList, name: string) {
-    this._todoList = todoList;
+  constructor(name: string, todoList: TodoList) {
     this._name = name;
+    this._todoList = todoList;
   }
 
   public get name(): string {
