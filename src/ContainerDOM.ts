@@ -1,14 +1,16 @@
+import NamedIdentifiable from "./NamedIdentifiable";
 import { createDiv } from "./utility";
 
-export default class ContainerDOM {
+export default class ContainerDOM extends NamedIdentifiable {
   protected _element: HTMLDivElement;
 
   public get element(): HTMLDivElement {
     return this._element;
   }
 
-  constructor(className: string, id?: string, ...children: HTMLElement[]) {
-    this._element = createDiv(className, id);
+  constructor(className: string, ...children: HTMLElement[]) {
+    super(className);
+    this._element = createDiv(this.id, className);
     if (children) {
       this.append(...children);
     }

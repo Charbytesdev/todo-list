@@ -9,21 +9,14 @@ export default class TodoDOM extends ContainerDOM {
   private _editButton: HTMLButtonElement;
   private _deleteButton: HTMLButtonElement;
 
-  constructor(
-    checked: boolean,
-    title: string,
-    date: string,
-    className: string,
-    id?: string
-  ) {
+  constructor(checked: boolean, title: string, date: string) {
     super("todo");
-
-    this._checkBox = createCheckBox(`${className}-checkbox`);
-    this._title = createDiv(`${className}-title`);
-    this._date = createDiv(`${className}-date`);
-    this._detailsButton = createButton(`${className}-button`);
-    this._editButton = createButton(`${className}-button`);
-    this._deleteButton = createButton(`${className}-button`);
+    this._checkBox = createCheckBox("checkbox");
+    this._title = createDiv("title");
+    this._date = createDiv("date");
+    this._detailsButton = createButton("button");
+    this._editButton = createButton("button");
+    this._deleteButton = createButton("button");
 
     this._checkBox.checked = checked;
     this._title.textContent = title;

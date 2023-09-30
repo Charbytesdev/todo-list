@@ -1,21 +1,22 @@
+import NamedIdentifiable from "./NamedIdentifiable";
+
 type Priority = "low" | "medium" | "high";
 
-export default class Todo {
+export default class Todo extends NamedIdentifiable {
   private _checked: boolean;
-  private _title: string;
   private _description: string;
   private _dueDate: string;
   private _priority: Priority;
 
   constructor(
     checked: boolean,
-    title: string,
+    name: string,
     description: string,
     dueDate: string,
     priority: Priority
   ) {
+    super(name);
     this._checked = checked;
-    this._title = title;
     this._description = description;
     this._dueDate = dueDate;
     this._priority = priority;
@@ -27,14 +28,6 @@ export default class Todo {
 
   public set checked(checked: boolean) {
     this._checked = checked;
-  }
-
-  public get title(): string {
-    return this._title;
-  }
-
-  public set title(title: string) {
-    this._title = title;
   }
 
   public get description(): string {

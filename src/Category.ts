@@ -1,20 +1,12 @@
+import NamedIdentifiable from "./NamedIdentifiable";
 import TodoList from "./TodoList";
 
-export default abstract class Category {
-  private _name: string;
+export default abstract class Category extends NamedIdentifiable {
   private _todoList: TodoList;
 
   constructor(name: string, todoList: TodoList) {
-    this._name = name;
+    super(name);
     this._todoList = todoList;
-  }
-
-  public get name(): string {
-    return this._name;
-  }
-
-  public set name(name: string) {
-    this._name = name;
   }
 
   public get todoList(): TodoList {

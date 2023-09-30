@@ -1,20 +1,12 @@
 import Category from "./Category";
+import NamedIdentifiable from "./NamedIdentifiable";
 
-export default abstract class CategoryList {
-  private _name: string;
+export default abstract class CategoryList extends NamedIdentifiable {
   private _categoryItems: Category[];
 
   constructor(name: string, categoryItems: Category[]) {
-    this._name = name;
+    super(name);
     this._categoryItems = categoryItems;
-  }
-
-  public get name(): string {
-    return this._name;
-  }
-
-  public set name(name) {
-    this._name = name;
   }
 
   public get categoryItems(): Category[] {
