@@ -1,13 +1,14 @@
+import RandomIdGenerator from "./RandomIdGenerator";
+
 export const createElement = (
   type: string,
   className: string,
   id?: string
 ): HTMLElement => {
   const el = document.createElement(type);
+
+  el.id = id ?? RandomIdGenerator();
   el.classList.add(className);
-  if (id) {
-    el.id = id;
-  }
   return el;
 };
 
