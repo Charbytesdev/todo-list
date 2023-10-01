@@ -1,8 +1,8 @@
-import ContainerDOM from "./ContainerDOM";
-import MainCategory from "./MainCategory";
-import Todo from "./Todo";
-import TodoDOM from "./TodoDOM";
-import TodoList from "./TodoList";
+import ContainerDOM from "./DOM/ContainerDOM";
+import MainCategory from "./app-logic/MainCategory";
+import Todo from "./app-logic/Todo";
+import TodoDOM from "./DOM/TodoDOM";
+import TodoList from "./app-logic/TodoList";
 
 // const listeners = {};
 

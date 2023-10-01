@@ -1,6 +1,6 @@
 import ContainerDOM from "./ContainerDOM";
-import Todo from "./Todo";
-import { createButton, createCheckBox, createDiv } from "./utility";
+import Todo from "../app-logic/Todo";
+import { createButton, createCheckBox, createDiv } from "../util/utility";
 
 export default class TodoDOM extends ContainerDOM {
   private _checkBox: HTMLInputElement;
