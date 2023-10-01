@@ -1,4 +1,4 @@
-import RandomIdGenerator from "./RandomIdGenerator";
+import RandomIdGenerator from "../util/RandomIdGenerator";
 
 export default abstract class NamedIdentifiable {
   private _name: string;
