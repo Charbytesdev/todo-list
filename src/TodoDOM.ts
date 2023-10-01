@@ -1,4 +1,5 @@
 import ContainerDOM from "./ContainerDOM";
+import Todo from "./Todo";
 import { createButton, createCheckBox, createDiv } from "./utility";
 
 export default class TodoDOM extends ContainerDOM {
@@ -9,8 +10,21 @@ export default class TodoDOM extends ContainerDOM {
   private _editButton: HTMLButtonElement;
   private _deleteButton: HTMLButtonElement;
 
-  constructor(checked: boolean, title: string, date: string) {
-    super("todo");
+  public static from(element: Todo): ContainerDOM {
+    return new TodoDOM(
+      element.name,
+      element.checked,
+      element.dueDate,
+      element.id
+    );
+  }
+
+  public static fromCollection(...todoCollection: Todo[]): ContainerDOM[] {
+    return todoCollection.map((todo) => TodoDOM.from(todo));
+  }
+
+  constructor(title: string, checked: boolean, date: string, id?: string) {
+    super(title, id);
     this._checkBox = createCheckBox("checkbox");
     this._title = createDiv("title");
     this._date = createDiv("date");

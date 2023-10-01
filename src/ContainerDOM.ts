@@ -8,9 +8,22 @@ export default class ContainerDOM extends NamedIdentifiable {
     return this._element;
   }
 
-  constructor(className: string, ...children: HTMLElement[]) {
-    super(className);
-    this._element = createDiv(this.id, className);
+  public static from(
+    element: NamedIdentifiable,
+    ...children: HTMLElement[]
+  ): ContainerDOM {
+    return new ContainerDOM(element.name, element.id, ...children);
+  }
+
+  public static fromCollection(
+    ...containerCollection: NamedIdentifiable[]
+  ): ContainerDOM[] {
+    return containerCollection.map((container) => ContainerDOM.from(container));
+  }
+
+  constructor(name: string, id?: string, ...children: HTMLElement[]) {
+    super(name, id);
+    this._element = createDiv(name, id);
     if (children) {
       this.append(...children);
     }
