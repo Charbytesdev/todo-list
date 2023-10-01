@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import CategoryList from "./CategoryList";
 import Project from "./MainCategory";
 

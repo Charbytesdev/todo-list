@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import Category from "./Category";
 import TodoList from "./TodoList";
 

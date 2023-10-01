@@ -43,8 +43,6 @@ const todo3 = new Todo(false, "title", "description", "date", "medium");
 const todoList = new TodoList([todo]);
 const mainCategory = new MainCategory("main", todoList, "description");
 
-console.log(mainCategory.todoList.todoItems.map((todo) => todo.checked));
-
 const homeCategory = new MainCategory("home-category", todoList, "description");
 const todayCategory = new MainCategory(
   "home-category",

@@ -4,8 +4,11 @@ type Priority = "low" | "medium" | "high";
 
 export default class Todo extends NamedIdentifiable {
   private _checked: boolean;
+
   private _description: string;
+
   private _dueDate: string;
+
   private _priority: Priority;
 
   constructor(

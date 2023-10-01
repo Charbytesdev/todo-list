@@ -4,10 +4,15 @@ import { createButton, createCheckBox, createDiv } from "./utility";
 
 export default class TodoDOM extends ContainerDOM {
   private _checkBox: HTMLInputElement;
+
   private _title: HTMLDivElement;
+
   private _date: HTMLDivElement;
+
   private _detailsButton: HTMLButtonElement;
+
   private _editButton: HTMLButtonElement;
+
   private _deleteButton: HTMLButtonElement;
 
   public static from(element: Todo): ContainerDOM {

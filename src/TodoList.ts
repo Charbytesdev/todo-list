@@ -6,6 +6,7 @@ export default class TodoList {
   constructor(todoItems: Todo[]) {
     this._todoItems = todoItems;
   }
+
   public get todoItems(): Todo[] {
     return this._todoItems;
   }
