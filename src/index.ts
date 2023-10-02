@@ -3,6 +3,7 @@ import MainCategory from "./app-logic/MainCategory";
 import Todo from "./app-logic/Todo";
 import TodoDOM from "./DOM/TodoDOM";
 import TodoList from "./app-logic/TodoList";
+import "./sass/nav.scss";
 
 // const listeners = {};
 

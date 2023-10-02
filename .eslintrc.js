@@ -5,6 +5,7 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.eslint.json",
   },
+  "ignore-patterns": "**/dist/*",
   rules: {
     "no-underscore-dangle": "off",
     "no-useless-constructor": "off",
