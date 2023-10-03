@@ -1,16 +1,19 @@
 .nav-bar {
   display: grid;
   grid-template: 1fr /1fr 1fr 1fr;
-  padding: 1.5rem;
+  padding: 1rem;
+
+  .github-logo {
+    content: url(../img/github-logo.png);
+    height: 2rem;
+    place-self: start;
+    transition: transform 1s ease-in-out;
+    &:hover {
+      transform: rotate(720deg);
+    }
+  }
+
   .nav-title {
     place-self: center;
-  }
-}
-
-.github-logo {
-  place-self: start;
-  transition: transform 1s ease-in-out;
-  &:hover {
-    transform: rotate(720deg);
   }
 }
