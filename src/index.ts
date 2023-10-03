@@ -4,6 +4,8 @@ import Todo from "./app-logic/Todo";
 import TodoDOM from "./DOM/TodoDOM";
 import TodoList from "./app-logic/TodoList";
 import "./sass/nav.scss";
+import { createNavLogo } from "./app-util/utility";
+createNavLogo();
 
 // const listeners = {};
 
@@ -74,5 +76,3 @@ const mainCategoryDOM = ContainerDOM.from(
   todoDOM2.element,
   todoDOM3.element
 );
-
-document.body.append(mainCategoryDOM.element);
