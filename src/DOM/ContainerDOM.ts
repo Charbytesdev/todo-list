@@ -1,5 +1,5 @@
 import NamedIdentifiable from "../app-logic/NamedIdentifiable";
-import { createDiv } from "../util/utility";
+import { createDiv } from "../app-util/utility";
 
 export default class ContainerDOM extends NamedIdentifiable {
   protected _element: HTMLDivElement;

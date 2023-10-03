@@ -1,3 +1,4 @@
+import githubLogo from "../img/github-logo.png";
 import RandomIdGenerator from "./RandomIdGenerator";
 
 export const createElement = (
@@ -33,3 +34,13 @@ export const createButton = (
   const button = createElement("button", className, id) as HTMLButtonElement;
   return button;
 };
+
+export function createNavLogo() {
+  const navLogo = document.getElementById("nav-logo");
+
+  if (navLogo == null) {
+    return;
+  } else {
+    navLogo.style.backgroundImage = "url()";
+  }
+}
