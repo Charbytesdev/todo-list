@@ -1,0 +1,20 @@
+.nav-bar {
+  display: grid;
+  grid-template: 1fr /1fr 1fr 1fr;
+
+  .github-logo {
+    content: url(../img/github-logo.png);
+    height: 2.5rem;
+    justify-self: start;
+    align-self: center;
+    transition: transform 1s ease-in-out;
+    &:hover {
+      transform: rotate(720deg);
+    }
+  }
+
+  .nav-title {
+    place-self: center;
+    font-size: 3rem;
+  }
+}
