@@ -1,9 +1,11 @@
+import NamedIdentifiable from "./NamedIdentifiable";
 import Todo from "./Todo";
 
-export default class TodoList {
+export default class TodoList extends NamedIdentifiable {
   private _todoItems: Todo[];
 
-  constructor(todoItems: Todo[]) {
+  constructor(name: string, todoItems: Todo[]) {
+    super(name);
     this._todoItems = todoItems;
   }
 
