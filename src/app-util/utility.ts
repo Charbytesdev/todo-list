@@ -1,11 +1,16 @@
 import githubLogo from "../img/github-logo.png";
+import throwError from "./ErrorThrower";
 import RandomIdGenerator from "./RandomIdGenerator";
+const CORRECT_TYPES = ["button", "div", "input"];
 
 export const createElement = (
   type: string,
   className: string,
   id?: string
 ): HTMLElement => {
+  if (!CORRECT_TYPES.includes(type)) {
+    throwError(type);
+  }
   const el = document.createElement(type);
 
   el.id = id ?? RandomIdGenerator();
