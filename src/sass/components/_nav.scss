@@ -1,7 +1,8 @@
 .nav-bar {
   display: grid;
+  padding: 0 1rem;
   grid-template: 1fr /1fr 1fr 1fr;
-
+  background-color: rgb(213, 63, 243);
   .github-logo {
     content: url(../img/github-logo.png);
     height: 2.5rem;
@@ -16,5 +17,7 @@
   .nav-title {
     place-self: center;
     font-size: 3rem;
+    color: white;
+    font-weight: 800;
   }
 }
