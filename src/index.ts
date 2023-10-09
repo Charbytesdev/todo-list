@@ -1,10 +1,16 @@
-import ContainerDOM from "./DOM/ContainerDOM";
 import MainCategory from "./app-logic/MainCategory";
 import Todo from "./app-logic/Todo";
-import TodoDOM from "./DOM/TodoDOM";
 import TodoList from "./app-logic/TodoList";
 import "./sass/main.scss";
 import { createNavLogo } from "./app-util/utility";
+import MainCategoryList from "./app-logic/CategoryList";
+import CategoryDOM from "./DOM/CategoryDOM";
+import DivDOM from "./DOM/DivDOM";
+import CategoryList from "./app-logic/CategoryList";
+import CategoryListDOM from "./DOM/CategoryListDOM";
+import Project from "./app-logic/Project";
+import ButtonDOM from "./DOM/ButtonDOM";
+import throwError from "./app-util/ErrorThrower";
 createNavLogo();
 
 // const listeners = {};
@@ -39,40 +45,105 @@ createNavLogo();
 //     : [functionToRun];
 // };
 
-const todo = new Todo(false, "title", "description", "date", "medium");
-const todo2 = new Todo(false, "title", "description", "date", "medium");
-const todo3 = new Todo(false, "title", "description", "date", "medium");
+function _initalize() {
+  const todo = new Todo(false, "title", "description", "date", "medium");
+  const todo2 = new Todo(false, "title", "description", "date", "medium");
+  const todo3 = new Todo(false, "title", "description", "date", "medium");
+  const appDisplay = new DivDOM("app-display");
+  const appContent = new DivDOM("app-content");
+  const appSidebar = new DivDOM("sidebar");
 
-const todoList = new TodoList([todo]);
-const mainCategory = new MainCategory("main", todoList, "description");
+  const todoList = new TodoList("main", [todo, todo2, todo3]);
+  const homeCategory = new MainCategory(
+    "home-category",
+    todoList,
+    "description"
+  );
+  const todayCategory = new MainCategory(
+    "today-category",
+    todoList,
+    "description"
+  );
+  const weekCategory = new MainCategory(
+    "week-category",
+    todoList,
+    "description"
+  );
+  const projectA = new Project("projectA", todoList);
+  const projectB = new Project("projectB", todoList);
+  const projectC = new Project("projectC", todoList);
+  const projectD = new Project("projectD", todoList);
+  const projectE = new Project("projectE", todoList);
+  const projectCategoryList = new CategoryList([
+    projectA,
+    projectB,
+    projectC,
+    projectD,
+    projectE,
+  ]);
 
-const homeCategory = new MainCategory("home-category", todoList, "description");
-const todayCategory = new MainCategory(
-  "home-category",
-  todoList,
-  "description"
-);
-const thisWeekCategory = new MainCategory(
-  "home-category",
-  todoList,
-  "description"
-);
+  const [projectADOM, projectBDOM, projectCDOM, projectDDOM, projectEDOM] =
+    CategoryDOM.fromCollection(
+      projectA,
+      projectB,
+      projectC,
+      projectD,
+      projectE
+    );
 
-const [homeCategoryDOM, todayCategoryDOM, thisWeekCategoryDOM] =
-  ContainerDOM.fromCollection(homeCategory, todayCategory, thisWeekCategory);
+  const homeCategoryDOM = CategoryDOM.from(homeCategory);
+  const todayCategoryDOM = CategoryDOM.from(todayCategory);
+  const weekCategoryDOM = CategoryDOM.from(weekCategory);
 
-const [todoDOM, todoDOM2, todoDOM3] = TodoDOM.fromCollection(
-  todo,
-  todo2,
-  todo3
-);
+  CategoryDOM.currentActive = homeCategoryDOM;
+  const mainCategoryList = new CategoryList([
+    homeCategory,
+    todayCategory,
+    weekCategory,
+  ]);
+  const mainCategoryListDOM = CategoryListDOM.from(mainCategoryList);
+  const projectCategoryListDOM = CategoryListDOM.from(projectCategoryList);
+  const addButton = new ButtonDOM("add-button");
+  addButton.setTextContent("+");
+  appSidebar.append(
+    homeCategoryDOM.button.element,
+    todayCategoryDOM.button.element,
+    weekCategoryDOM.button.element,
+    projectADOM.button.element,
+    projectBDOM.button.element,
+    projectCDOM.button.element,
+    projectDDOM.button.element,
+    projectEDOM.button.element,
+    addButton.element
+  );
 
-const mainCategoryDOM = ContainerDOM.from(
-  mainCategory,
-  homeCategoryDOM.element,
-  todayCategoryDOM.element,
-  thisWeekCategoryDOM.element,
-  todoDOM.element,
-  todoDOM2.element,
-  todoDOM3.element
-);
+  const dialogBox =
+    (document.getElementById("create-dialog") as HTMLDialogElement) ||
+    throwError("Element Id create-dialog doesn't exist");
+
+  const closeButton =
+    document.getElementById("close-button") ||
+    throwError("Element Id close-button doesn't exist");
+  closeButton.onclick = () => {
+    dialogBox.close();
+  };
+  addButton.element.onclick = () => {
+    dialogBox.showModal();
+  };
+  appContent.append(
+    homeCategoryDOM.todoList.element,
+    todayCategoryDOM.todoList.element,
+    weekCategoryDOM.todoList.element,
+    projectADOM.todoList.element,
+    projectBDOM.todoList.element,
+    projectCDOM.todoList.element,
+    projectDDOM.todoList.element,
+    projectEDOM.todoList.element
+  );
+  const app = document.getElementById("app-container");
+
+  appDisplay.append(appSidebar.element, appContent.element);
+  app?.append(appDisplay.element);
+}
+
+_initalize();
