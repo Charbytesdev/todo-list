@@ -1,6 +1,5 @@
 import NamedIdentifiable from "../app-logic/NamedIdentifiable";
-import throwError from "../app-util/ErrorThrower";
-import { createDiv, createElement } from "../app-util/utility";
+import { createElement } from "../app-util/utility";
 
 export default abstract class DOM extends NamedIdentifiable {
   protected _element: HTMLElement;

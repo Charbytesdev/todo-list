@@ -1,6 +1,5 @@
-import NamedIdentifiable from "../app-logic/NamedIdentifiable";
 import TodoList from "../app-logic/TodoList";
-import DivListDOM from "./DivContainerDOM";
+import DivListDOM from "./DivListDOM";
 import TodoDOM from "./TodoDOM";
 
 export default class TodoListDOM extends DivListDOM {
