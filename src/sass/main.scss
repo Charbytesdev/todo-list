@@ -1,5 +1,6 @@
-@use "./components/nav";
-@use "./components/category";
+@use "layout";
+@use "components";
+@use "abstracts";
 
 *,
 *::before,
@@ -33,16 +34,7 @@ body {
     display: flex;
     height: 100%;
     width: 100%;
-    .category-list {
-      padding: 1rem 2rem;
-      width: 10rem;
-      display: flex;
-      align-items: start;
-      flex-direction: column;
-      gap: 1.5rem;
-      height: 100%;
-      border-right: rgba(0, 0, 0, 0.6) solid 0.002rem;
-    }
+
     .app-content {
       display: flex;
       height: 100%;
