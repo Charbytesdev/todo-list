@@ -1,3 +1,3 @@
-export default function throwError(message: string): never {
-  throw new Error(message);
+export default function throwError(message: string): any {
+  alert(message);
 }
