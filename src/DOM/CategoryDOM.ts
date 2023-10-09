@@ -34,16 +34,23 @@ export default class CategoryDOM extends DOM {
   constructor(name: string, todoList: TodoListDOM, id?: string) {
     const buttonDOM = new ButtonDOM(name);
     buttonDOM.element.textContent = name.split("-")[0];
-    buttonDOM.element.classList.add("category");
+    buttonDOM.element.classList.add("category-button");
     super("div", name, id, buttonDOM.element, todoList.element);
     this._button = buttonDOM;
     this._todoList = todoList;
     todoList.element.classList.add("category-content");
     this._todoList.element.classList.add("inactive");
     this._button.element.classList.add("inactive");
-    this._button.element.addEventListener("click", () => {
+    this._button.element.addEventListener("click", (e) => {
       this.deactivatePrevious();
       this.activateCurrent();
+      this._todoList.todoList.forEach((todo) =>
+        todo.element.children[5].addEventListener("click", () => {
+          const indexOfTodo = this._todoList.todoList.indexOf(todo);
+          const todoElement = this.todoList.todoList[indexOfTodo].element;
+          todoElement.parentNode?.removeChild(todoElement);
+        })
+      );
     });
   }
 
