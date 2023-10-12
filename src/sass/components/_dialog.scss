@@ -1,7 +1,9 @@
-.create-dialog {
-  position: absolute;
-  left: calc(50% - 12.5rem);
-  top: calc(50% - 12.5rem);
-  width: 25rem;
-  height: 25rem;
+.create-dialog,
+.details-dialog {
+  border: transparent;
+  border-radius: 20px;
+  padding: 0;
+  &::backdrop {
+    backdrop-filter: blur(10px);
+  }
 }
