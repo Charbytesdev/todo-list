@@ -11,49 +11,31 @@ import CategoryListDOM from "./DOM/CategoryListDOM";
 import Project from "./app-logic/Project";
 import ButtonDOM from "./DOM/ButtonDOM";
 import throwError from "./app-util/ErrorThrower";
-createNavLogo();
-
-// const listeners = {};
-
-// const notify = (message, options) => {
-//   switch (message) {
-//     case "place":
-//       if (!isGameOver) cells[options.index].textContent = options.marker;
-//       break;
-//     case "win": // handle displaying win message:
-//       isGameOver = true;
-//       console.log(`${options.player.name} has won! Oh frabjous day!`);
-//       // also, in case there are any win functions we wanna run...
-//       listeners.win?.forEach((func) => func(options.player));
-//       break;
-//     case "draw":
-//       isGameOver = true;
-//       console.log("Ah well, can't win 'em all.");
-//       listeners.draw?.forEach((func) => func());
-//       break;
-//     case "reset":
-//       isGameOver = false;
-//       console.log("Here we go agin!");
-//       cells.forEach((cell) => (cell.textContent = ""));
-//       listeners.reset?.forEach((func) => func());
-//   }
-// };
-
-// const registerListener = (message, functionToRun) => {
-//   listeners[message] = listeners[message]
-//     ? [...listeners[message], functionToRun]
-//     : [functionToRun];
-// };
+import TodoDOM from "./DOM/TodoDOM";
 
 function _initalize() {
-  const todo = new Todo(false, "title", "description", "date", "medium");
-  const todo2 = new Todo(false, "title", "description", "date", "medium");
-  const todo3 = new Todo(false, "title", "description", "date", "medium");
+  const todo = new Todo(
+    false,
+    "Play the piano",
+    "practice",
+
+    new Date(),
+    "low"
+  );
+  const todo2 = new Todo(
+    false,
+    "Go for walk",
+    "20minute walk",
+    new Date(),
+    "medium"
+  );
+  const todo3 = new Todo(false, "Feed my cat", "only 25g", new Date(), "high");
   const appDisplay = new DivDOM("app-display");
   const appContent = new DivDOM("app-content");
   const appSidebar = new DivDOM("sidebar");
 
   const todoList = new TodoList("main", [todo, todo2, todo3]);
+
   const homeCategory = new MainCategory(
     "home-category",
     todoList,
@@ -74,13 +56,6 @@ function _initalize() {
   const projectC = new Project("projectC", todoList);
   const projectD = new Project("projectD", todoList);
   const projectE = new Project("projectE", todoList);
-  const projectCategoryList = new CategoryList([
-    projectA,
-    projectB,
-    projectC,
-    projectD,
-    projectE,
-  ]);
 
   const [projectADOM, projectBDOM, projectCDOM, projectDDOM, projectEDOM] =
     CategoryDOM.fromCollection(
@@ -96,13 +71,7 @@ function _initalize() {
   const weekCategoryDOM = CategoryDOM.from(weekCategory);
 
   CategoryDOM.currentActive = homeCategoryDOM;
-  const mainCategoryList = new CategoryList([
-    homeCategory,
-    todayCategory,
-    weekCategory,
-  ]);
-  const mainCategoryListDOM = CategoryListDOM.from(mainCategoryList);
-  const projectCategoryListDOM = CategoryListDOM.from(projectCategoryList);
+
   const addButton = new ButtonDOM("add-button");
   addButton.setTextContent("+");
   appSidebar.append(
@@ -121,15 +90,35 @@ function _initalize() {
     (document.getElementById("create-dialog") as HTMLDialogElement) ||
     throwError("Element Id create-dialog doesn't exist");
 
+  const closeId = "cancel-btn";
+  const createId = "create-btn";
+
   const closeButton =
-    document.getElementById("close-button") ||
-    throwError("Element Id close-button doesn't exist");
+    document.getElementById(closeId) ||
+    throwError(`Element Id ${closeId} doesn't exist`);
+
+  const createButton =
+    document.getElementById(createId) ||
+    throwError(`Element Id ${createId} doesn't exist`);
+
+  createButton.onclick = (e: Event) => {
+    if (!(dialogBox.children[0] as HTMLFormElement).checkValidity()) return;
+    const inputs = document.getElementsByClassName(
+      "form-input"
+    ) as HTMLCollectionOf<HTMLInputElement>;
+
+    CategoryDOM.currentActive.appendTodo(
+      TodoDOM.from(Todo.from(inputs) as Todo)
+    );
+  };
+
   closeButton.onclick = () => {
     dialogBox.close();
   };
   addButton.element.onclick = () => {
     dialogBox.showModal();
   };
+
   appContent.append(
     homeCategoryDOM.todoList.element,
     todayCategoryDOM.todoList.element,
