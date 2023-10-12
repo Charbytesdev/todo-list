@@ -21,3 +21,47 @@ input:valid {
 input:focus {
   background-color: rgb(64, 70, 5);
 }
+
+.mydict div {
+  display: flex;
+  margin-top: 0.15rem;
+}
+
+.mydict input[type="radio"] {
+  clip: rect(0 0 0 0);
+  position: absolute;
+}
+
+@mixin priority-option($child, $color) {
+  label:nth-child(#{$child}) input:checked + span {
+    box-shadow: 0 0 0 0.0625em $color;
+    box-shadow: 0 0 0 0.0625em $color;
+    color: $color;
+  }
+}
+
+@include priority-option(1, colors.$neon-green);
+@include priority-option(2, colors.$neon-yellow);
+@include priority-option(3, colors.$neon-red);
+
+.mydict label span {
+  display: block;
+  cursor: pointer;
+  background-color: #fff;
+  padding: 0.375em 0.75em;
+  position: relative;
+  margin-left: 0.0625em;
+  box-shadow: 0 0 0 0.0625em #b5bfd9;
+  letter-spacing: 0.05em;
+  color: #3e4963;
+  text-align: center;
+  transition: background-color 0.5s ease;
+}
+
+label:first-child span {
+  border-radius: 0.375em 0 0 0.375em;
+}
+
+label:last-child span {
+  border-radius: 0 0.375em 0.375em 0;
+}
