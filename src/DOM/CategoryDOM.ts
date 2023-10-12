@@ -44,14 +44,11 @@ export default class CategoryDOM extends DOM {
     this._button.element.addEventListener("click", (e) => {
       this.deactivatePrevious();
       this.activateCurrent();
-      this._todoList.todoList.forEach((todo) =>
-        todo.element.children[5].addEventListener("click", () => {
-          const indexOfTodo = this._todoList.todoList.indexOf(todo);
-          const todoElement = this.todoList.todoList[indexOfTodo].element;
-          todoElement.parentNode?.removeChild(todoElement);
-        })
-      );
     });
+  }
+
+  public appendTodo(todoDOM: TodoDOM) {
+    this.todoList.append(todoDOM.element);
   }
 
   public activateCurrent() {
