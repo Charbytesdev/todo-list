@@ -1,3 +1,4 @@
+@use "../abstracts/colors" as *;
 .category-button,
 .add-button {
   cursor: pointer;
@@ -39,5 +40,52 @@
     &::before {
       content: none;
     }
+  }
+}
+
+.form-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  grid-column: 1/-1;
+}
+
+.form-btn,
+.delete-button,
+.edit-button,
+.details-button,
+.okay-button {
+  &.delete-button,
+  &.edit-button,
+  &.details-button {
+    box-shadow: 0 0 40px 15px $neon-purple inset;
+    font-size: 1rem;
+  }
+  &.delete-button:hover {
+    box-shadow: 0 0 40px 15px $neon-red inset, 0 0 40px 10px $neon-red;
+    border: 2px $neon-red solid;
+    color: $neon-red;
+  }
+  font-size: 2rem;
+  font-family: "Mate SC", sans-serif;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 0 20px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: $neon-yellow;
+  background-color: transparent;
+  border: 2px $neon-yellow solid;
+  box-shadow: 0 0 40px 15px $neon-red inset;
+
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.03);
+    letter-spacing: 0.2rem;
+    box-shadow: 0 0 40px 15px $neon-green inset, 0 0 40px 10px $neon-green;
+    border: 2px $neon-green solid;
+
+    color: $neon-green;
+    cursor: pointer;
   }
 }
