@@ -2,7 +2,6 @@
 @use "components";
 @use "abstracts";
 
-*,
 *::before,
 *::after {
   padding: 0;
@@ -19,6 +18,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Mate SC", sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
 
@@ -41,14 +43,33 @@ body {
       width: 100%;
       position: relative;
       .category-content {
+        overflow: hidden;
         position: absolute;
         width: 100%;
         .todo {
-          width: 100%;
-          display: flex;
-          gap: 5rem;
-          justify-content: space-between;
+          display: grid;
+          grid-template: 1fr/ 1fr 1fr 1fr 1fr 1fr 1fr;
+          place-items: start;
+          align-items: center;
           padding: 0.5rem 1rem;
+          .checkbox {
+            cursor: pointer;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            appearance: none;
+            -webkit-appearance: none;
+            &:checked {
+              background-color: abstracts.$neon-purple;
+            }
+          }
+          .edit-button,
+          .details-button,
+          .delete-button {
+            justify-self: end;
+          }
         }
       }
       .active {
