@@ -1,6 +1,6 @@
-import githubLogo from "../img/github-logo.png";
 import throwError from "./ErrorThrower";
 import RandomIdGenerator from "./RandomIdGenerator";
+export type Priority = "low" | "medium" | "high";
 const CORRECT_TYPES = ["button", "div", "input"];
 
 export const createElement = (
@@ -48,4 +48,8 @@ export function createNavLogo() {
   } else {
     navLogo.style.backgroundImage = "url()";
   }
+}
+
+export function idNotFound(id: string): any {
+  throwError(`Element Id ${id} doesn't exist`);
 }
