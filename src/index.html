@@ -14,55 +14,118 @@
             <div class="nav-title">//Todo</div>
         </nav>
         <dialog class="create-dialog" id="create-dialog">
-            <form class="create-form">
-                <h1 id="form-title">Sign Up!</h1>
+            <form class="create-form" onsubmit="return false;">
+                <h1 class="form-title">New Todo</h1>
                 <div>
-                    <label for="name" class="required">Name</label>
-                    <input type=text id="name" pattern="[A-Za-z]+" placeholder="Barry" required>
+                    <label class="label required" for="title">Title</label>
+                    <input class="form-input" type=text id="title" placeholder="Make lunch" required>
                 </div>
                 <div>
-                    <label for="surname" class="required">Surname</label>
-                    <input type="text" id="surname" pattern="[A-Za-z]+" placeholder="Allen" required>
-                </div>
-
-                <div>
-                    <label for="email" class="required">Email</label>
-                    <input type="email" id="email" placeholder="barry.fast@mail.com" required>
-                </div>
-                <div>
-                    <label for="phone-number">Phone Number</label>
-                    <input type="tel" id="phone-number" pattern="[0-9]+" maxlength="13" placeholder="999-999-999">
+                    <label class="label" for="description">Description</label>
+                    <input class="form-input" type="text" id="description" placeholder="Buy ingredients, cook, eat">
                 </div>
 
                 <div>
-                    <label for="password" class="required">Password</label>
-                    <div id="password-container">
-                        <input type=password id="password" name="password" placeholder="Password"
-                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
-                        <span id="tooltip">?</span>
-                        <div id="tooltip-text">
-                            <span>*Minimum 8 Characters</span>
-                            <div>*Must include Number</div>
-                            <div>*Must include Special: !@#$%^&*</div>
-                            <div>*Must include UPPERCASE & &nbsp;&nbsp;lowercase Letter</div>
-                        </div>
+                    <label class="label required" for="date">Date</label>
+                    <input class="form-input" type="datetime-local" id="date" required>
+                </div>
+                <div class="mydict">
+                    <label class="label required"> Priority</label>
+                    <div>
+                        <label>
+                            <input class="form-input" type="radio" name="radio" checked>
+                            <span>Low</span>
+                        </label>
+                        <label>
+                            <input class="form-input" type="radio" name="radio">
+                            <span>Medium</span>
+                        </label>
+                        <label>
+                            <input class="form-input" type="radio" name="radio">
+                            <span>High</span>
+                        </label>
+
                     </div>
                 </div>
-                <div>
-                    <label for="confirm-password" class="required"> Confirm Password</label>
-                    <input type=password id="confirm-password" name="confirm-password" placeholder="Confirm Password"
-                        required>
-                </div>
 
-                <button id="submit-btn" type="submit">Submit</button>
-                <div id="login-container">
-                    <span id="already-member">already a member? <button id="login-btn"
-                            type="button">Login</button></span>
-                    <button id="close-button" type="button">Cancel</button>
-                </div>
+                <div class="form-btn-container">
 
+                    <button id="create-btn" class="form-btn" type="submit">Create</button>
+                    <button id="cancel-btn" class="form-btn">Cancel</button>
+                </div>
             </form>
         </dialog>
+
+
+
+        <dialog class="details-dialog" id="details-dialog">
+            <form class="details-form" onsubmit="return false;">
+                <div class="details-container">
+                    <label class="label">Title:</label>
+                    <div class="label" id="details-title">Title</div>
+                </div>
+
+                <div class="details-container">
+                    <label class="label">Date:</label>
+                    <div class="label" id="details-date">Date</div>
+
+                </div>
+
+                <div class="details-container">
+                    <label class="label">Description:</label>
+                    <div class="label" id="details-description">Description</div>
+                </div>
+
+
+                <div class="form-btn-container">
+
+                    <button id="okay-btn" class="okay-button" type="submit">Okay</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog class="edit-dialog" id="edit-dialog">
+            <form class="edit-form" onsubmit="return false;">
+                <h1 class="form-title">Edit Todo</h1>
+                <div>
+                    <label class="label required" for="title">Title</label>
+                    <input class="form-input" type=text id="edit-title" required>
+                </div>
+                <div>
+                    <label class="label" for="description">Description</label>
+                    <input class="form-input" type="text" id="edit-description">
+                </div>
+
+                <div>
+                    <label class="label required" for="date">Date</label>
+                    <input class="form-input" type="datetime-local" id="edit-date" required>
+                </div>
+                <div class="mydict">
+                    <label class="label required"> Priority</label>
+                    <div>
+                        <label>
+                            <input class="edit-priority" type="radio" name="radio" checked>
+                            <span>Low</span>
+                        </label>
+                        <label>
+                            <input class="edit-priority" type="radio" name="radio">
+                            <span>Medium</span>
+                        </label>
+                        <label>
+                            <input class="edit-priority" type="radio" name="radio">
+                            <span>High</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="form-btn-container">
+
+                    <button id="edit-okay" class="form-btn" type="submit">Confirm</button>
+                    <button id="edit-cancel" class="form-btn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+
     </div>
 
 </body>
