@@ -47,6 +47,7 @@ body {
         position: absolute;
         width: 100%;
         .todo {
+          font-size: 1.1rem;
           display: grid;
           grid-template: 1fr/ 1fr 1fr 1fr 1fr 1fr 1fr;
           place-items: start;
