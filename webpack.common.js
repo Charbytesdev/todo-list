@@ -6,8 +6,9 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "ToDo List",
+      title: "ToDo",
       template: "src/index.html",
+      favicon: "src/./assets/img/favicon.png",
     }),
   ],
 
