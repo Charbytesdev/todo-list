@@ -1,10 +1,20 @@
+@use "../abstracts/colors";
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
   position: relative;
-  width: 8rem;
+  width: 8.3rem;
   align-items: start;
   border-right: rgba(0, 0, 0, 0.6) solid 0.002rem;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 8.25rem;
+    right: 0;
+    width: 105%;
+    border-bottom: solid lightblue 1px;
+    border-style: groove;
+  }
 }
