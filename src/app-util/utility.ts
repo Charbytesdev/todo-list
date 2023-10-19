@@ -1,5 +1,5 @@
 import throwError from "./ErrorThrower";
-import RandomIdGenerator from "./RandomIdGenerator";
+import RandomIdGenerator from "./RandomGenerator";
 export type Priority = "low" | "medium" | "high";
 const CORRECT_TYPES = ["button", "div", "input"];
 
