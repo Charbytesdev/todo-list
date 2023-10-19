@@ -1,0 +1,57 @@
+@use "../components/form";
+
+.create-form {
+  @media only screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    .form-btn-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-title {
+      text-wrap: wrap;
+    }
+  }
+}
+
+body {
+  .app {
+    @media only screen and (max-width: 1200px) {
+      height: 100%;
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      height: 100%;
+      width: 100%;
+      .todo {
+        .checkbox {
+          scale: 0.8;
+        }
+        width: 100%;
+        gap: 0.3rem;
+        .title {
+          font-size: 1rem;
+        }
+        .date {
+          font-size: 0.8rem;
+        }
+        .edit-button,
+        .delete-button {
+          padding: 0.1rem 0.2rem;
+          font-size: 0.8rem;
+        }
+        .details-button {
+          display: none;
+        }
+      }
+      .sidebar {
+        width: 4rem;
+        .category-button {
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+}
