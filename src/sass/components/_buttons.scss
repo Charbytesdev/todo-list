@@ -1,19 +1,40 @@
 @use "../abstracts/colors" as *;
-.category-button,
-.add-button {
+.category-button {
+  font-family: "Mate SC", "Courier New", Courier, monospace;
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
+    &::before {
+      content: "* ";
+    }
+    &:hover,
+    &.active {
+      &::before {
+        content: "* ";
+      }
+      &::after {
+        content: " *";
+      }
+    }
+  }
+
+  &::before {
+    content: "/ ";
+  }
   cursor: pointer;
   border: none;
   background: none;
   color: rgba(0, 0, 0, 0.6);
   font-size: 1rem;
+
   &:hover,
   &.active {
     color: rgba(0, 0, 0);
     font-weight: bold;
     letter-spacing: 0.01rem;
     scale: 1.1;
-    &::before {
-      content: "// ";
+    &::after {
+      content: " /";
     }
     &:hover {
       scale: 1.2;
@@ -27,16 +48,25 @@
 }
 
 .add-button {
+  cursor: pointer;
   position: absolute;
-  bottom: 20px;
+  bottom: 1rem;
+  left: 1rem;
   width: 2rem;
   height: 2rem;
-  border: 2px solid rgb(44, 41, 46);
+  border: 0.1rem solid rgb(44, 41, 46);
   background-color: hsl(290, 79%, 51%);
   color: rgb(255, 255, 255);
   border-radius: 50%;
-  &:hover {
+  &:hover,
+  &.active {
+    color: rgba(0, 0, 0);
+    font-weight: bold;
+    scale: 1.1;
     color: rgb(255, 255, 255);
+    border: 0.15rem solid rgb(44, 41, 46);
+  }
+  &:hover {
     &::before {
       content: none;
     }
@@ -50,6 +80,27 @@
   grid-column: 1/-1;
 }
 
+.edit-btn-container {
+  margin-top: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-hover($color) {
+  &:hover {
+    box-shadow: 0 0 0 0.0625em $color;
+    box-shadow: 0 0 0 0.0625em $color;
+    color: $color;
+
+    box-shadow: 0 0 40px 15px $color inset, 0 0 40px 10px $color;
+    border: 2px $color solid;
+    color: $color;
+  }
+}
+
 .form-btn,
 .delete-button,
 .edit-button,
@@ -61,11 +112,21 @@
     box-shadow: 0 0 40px 15px $neon-purple inset;
     font-size: 1rem;
   }
-  &.delete-button:hover {
-    box-shadow: 0 0 40px 15px $neon-red inset, 0 0 40px 10px $neon-red;
-    border: 2px $neon-red solid;
-    color: $neon-red;
+  &.details-button {
+    @include button-hover($neon-green);
   }
+  &.delete-button {
+    @include button-hover($neon-red);
+  }
+  &.edit-button {
+    @include button-hover($neon-yellow);
+  }
+
+  &.edit-cancel-btn,
+  &.create-cancel-btn {
+    @include button-hover($neon-red);
+  }
+
   font-size: 2rem;
   font-family: "Mate SC", sans-serif;
   text-transform: uppercase;
