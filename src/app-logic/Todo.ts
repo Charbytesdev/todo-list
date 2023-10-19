@@ -27,7 +27,8 @@ export default class Todo extends NamedIdentifiable {
           item.nextElementSibling?.textContent?.toLowerCase() as Priority;
       }
     }
-
+    //Reset form
+    (arr[0].parentElement?.parentElement as HTMLFormElement).reset();
     return new Todo(false, inputs[0], inputs[1], new Date(inputs[2]), priority);
   }
 
@@ -36,9 +37,10 @@ export default class Todo extends NamedIdentifiable {
     name: string,
     description: string,
     dueDate: Date,
-    priority: Priority
+    priority: Priority,
+    id?: string
   ) {
-    super(name);
+    super(name, id);
     this._checked = checked;
     this._description = description;
     this._dueDate = dueDate;
