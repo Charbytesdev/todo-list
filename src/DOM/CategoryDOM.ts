@@ -1,22 +1,14 @@
 import Category from "../app-logic/Category";
 import ButtonDOM from "./ButtonDOM";
+import CategoryListDOM from "./CategoryListDOM";
 import DOM from "./DOM";
 import TodoDOM from "./TodoDOM";
 import TodoListDOM from "./TodoListDOM";
 export default class CategoryDOM extends DOM {
   private _button: ButtonDOM;
   private _todoList: TodoListDOM;
-  private static _currentActive: CategoryDOM;
-  public static get currentActive() {
-    return CategoryDOM._currentActive;
-  }
 
-  public static set currentActive(currentActive: CategoryDOM) {
-    CategoryDOM._currentActive = currentActive;
-    this.currentActive.activateCurrent();
-  }
-
-  public static fromCollection(...categoryList: Category[]): CategoryDOM[] {
+  public static fromCollection(categoryList: Category[]): CategoryDOM[] {
     return categoryList.map((category) => CategoryDOM.from(category));
   }
 
@@ -35,37 +27,41 @@ export default class CategoryDOM extends DOM {
     const buttonDOM = new ButtonDOM(name);
     buttonDOM.element.textContent = name.split("-")[0];
     buttonDOM.element.classList.add("category-button");
-    super("div", name, id, buttonDOM.element, todoList.element);
+    super("div", name, id);
     this._button = buttonDOM;
     this._todoList = todoList;
     todoList.element.classList.add("category-content");
     this._todoList.element.classList.add("inactive");
     this._button.element.classList.add("inactive");
-    this._button.element.addEventListener("click", (e) => {
-      this.deactivatePrevious();
-      this.activateCurrent();
-    });
+    this._button.element.addEventListener("click", () =>
+      this.buttonClickHandler()
+    );
+  }
+
+  public buttonClickHandler() {
+    {
+      if (CategoryListDOM.currentActive) {
+        CategoryDOM.deactivate(CategoryListDOM.currentActive);
+      }
+      CategoryListDOM.updateCurrent(this);
+      CategoryListDOM.storeCurrentCategory();
+    }
   }
 
   public appendTodo(todoDOM: TodoDOM) {
     this.todoList.append(todoDOM.element);
   }
 
-  public activateCurrent() {
-    this._button.element.classList.add("active");
-    this._todoList.element.classList.add("active");
-    this._button.element.classList.remove("inactive");
-    this._todoList.element.classList.remove("inactive");
+  public static activate(categoryDOM: CategoryDOM) {
+    categoryDOM._button.element.classList.add("active");
+    categoryDOM._todoList.element.classList.add("active");
+    categoryDOM._button.element.classList.remove("inactive");
+    categoryDOM._todoList.element.classList.remove("inactive");
   }
 
-  public deactivatePrevious() {
-    if (CategoryDOM._currentActive) this.deactivate(CategoryDOM._currentActive);
-    CategoryDOM._currentActive = this;
-  }
-
-  public deactivate(categoryDOM: CategoryDOM) {
+  public static deactivate(categoryDOM: CategoryDOM) {
     categoryDOM._todoList.element.classList.remove("active");
-    categoryDOM.button.element.classList.remove("active");
+    categoryDOM._button.element.classList.remove("active");
     categoryDOM._button.element.classList.add("inactive");
     categoryDOM._todoList.element.classList.add("inactive");
   }

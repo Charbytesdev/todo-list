@@ -1,34 +1,76 @@
 import CategoryList from "../app-logic/CategoryList";
-import ButtonListDOM from "./ButtonListDOM";
+import throwError from "../app-util/ErrorThrower";
+import RandomGenerator from "../app-util/RandomGenerator";
 import CategoryDOM from "./CategoryDOM";
 import DOM from "./DOM";
 export default class CategoryListDOM extends DOM {
-  private _categories: CategoryDOM[];
+  private static _categories: CategoryDOM[];
+  private static _currentActive: CategoryDOM;
 
-  public get categories(): CategoryDOM[] {
-    return this._categories;
+  public static setFromLogic() {
+    return new CategoryListDOM(
+      "sidebar",
+      RandomGenerator(),
+      ...CategoryDOM.fromCollection(CategoryList.categoryItems)
+    );
+  }
+
+  public static find(id: string) {
+    const category = this._categories.find((category) => category.id == id);
+    return category || throwError(`category id ${id} not found`);
+  }
+
+  public static updateCurrent(currentActive: CategoryDOM) {
+    if (CategoryListDOM.currentActive) {
+      CategoryDOM.deactivate(CategoryListDOM.currentActive);
+    }
+    if (CategoryListDOM._categories.indexOf(currentActive))
+      CategoryListDOM.currentActive = currentActive;
+    CategoryDOM.activate(CategoryListDOM.currentActive);
+  }
+
+  public static storeCurrentCategory() {
+    localStorage.setItem(
+      "currentCategory",
+      JSON.stringify(
+        this._categories.indexOf(
+          this._categories.find(
+            (category) => category.id == this._currentActive.id
+          ) as CategoryDOM
+        )
+      )
+    );
+  }
+
+  public static get currentActive(): CategoryDOM {
+    return this._currentActive;
+  }
+
+  public static set currentActive(currentActive: CategoryDOM) {
+    this._currentActive = currentActive;
+  }
+
+  public static get categories(): CategoryDOM[] {
+    return CategoryListDOM._categories;
   }
   public getButtonElements(): HTMLElement[] {
-    return this._categories.map((category) => category.button.element);
+    return CategoryListDOM._categories.map(
+      (category) => category.button.element
+    );
   }
 
   public set categories(categories: CategoryDOM[]) {
-    this._categories = categories;
+    CategoryListDOM._categories = categories;
   }
 
-  public static from(categoryList: CategoryList): CategoryListDOM {
-    return new CategoryListDOM(
-      categoryList.name,
-      categoryList.id,
-      ...categoryList.categoryItems.map((category) =>
-        CategoryDOM.from(category)
-      )
+  public static from() {
+    CategoryListDOM._categories = CategoryDOM.fromCollection(
+      CategoryList.categoryItems
     );
   }
 
   constructor(name: string, id?: string, ...categoryList: CategoryDOM[]) {
     super("div", name, id);
-    this._categories = categoryList;
-    this.append(...categoryList.map((category) => category.button.element));
+    CategoryListDOM._categories = categoryList;
   }
 }
