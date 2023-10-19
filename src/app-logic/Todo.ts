@@ -29,7 +29,13 @@ export default class Todo extends NamedIdentifiable {
     }
     //Reset form
     (inputArray[0].parentElement?.parentElement as HTMLFormElement).reset();
-    return new Todo(false, inputs[0], inputs[1], new Date(inputs[2]), priority);
+    return new Todo(
+      false,
+      inputs[0],
+      inputs[1],
+      inputs[2] ? new Date(inputs[2]) : new Date(),
+      priority
+    );
   }
 
   constructor(
