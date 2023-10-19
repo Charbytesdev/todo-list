@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { Priority, createCheckBox, idNotFound } from "../app-util/utility";
 import ButtonDOM from "./ButtonDOM";
 import throwError from "../app-util/ErrorThrower";
+import CategoryList from "../app-logic/CategoryList";
 
 export default class TodoDOM extends DivDOM {
   private static counter = 0;
@@ -25,7 +26,6 @@ export default class TodoDOM extends DivDOM {
   private _deleteButton: ButtonDOM;
 
   public static from(element: Todo): TodoDOM {
-    console.log(element.dueDate);
     return new TodoDOM(
       element.name,
       element.checked,
@@ -67,6 +67,12 @@ export default class TodoDOM extends DivDOM {
     this._description = description;
     this._priority = priority;
     this.stylePriority(priority);
+    this._checkBox.addEventListener("change", () => {
+      const todoLogic = CategoryList.current.todoList.find(this.id) as Todo;
+      todoLogic.checked = !todoLogic.checked;
+      CategoryList.storeCategoryItems();
+    });
+
     this._deleteButton.element.addEventListener("click", () =>
       this.deleteHandler()
     );
@@ -122,7 +128,6 @@ export default class TodoDOM extends DivDOM {
         break;
       case "high":
         priorityList[2].checked = true;
-
         break;
     }
 
@@ -131,17 +136,25 @@ export default class TodoDOM extends DivDOM {
     description.value = this.description;
 
     const okayButton = document.getElementById(okayId) || idNotFound(okayId);
+
     okayButton.onclick = () => {
       if (!(editDialog.children[0] as HTMLFormElement).checkValidity()) return;
       this.title = title.value;
       this.date = `${date.value}`.replace("T", " ");
       this.description = description.value;
+      const todoLogic = CategoryList.current.todoList.find(this.id) as Todo;
 
       const checkedPriority = priorityList.find((priority) => priority.checked);
       this.priority =
         checkedPriority?.nextElementSibling?.textContent?.toLowerCase() as Priority;
       this.stylePriority(this.priority);
+
+      todoLogic.name = title.value;
+      todoLogic.dueDate = date.value;
+      todoLogic.description = description.value;
+      todoLogic.priority = this.priority;
       editDialog.close();
+      CategoryList.storeCategoryItems();
     };
 
     const cancelButton =
@@ -149,6 +162,13 @@ export default class TodoDOM extends DivDOM {
     cancelButton.onclick = () => {
       editDialog.close();
     };
+  }
+
+  private deleteHandler() {
+    const todo = CategoryList.current.todoList.find(this.id) as Todo;
+    CategoryList.current.todoList.remove(todo);
+    this.element.parentNode?.removeChild(this.element);
+    CategoryList.storeCategoryItems();
   }
 
   private detailsHandler() {
@@ -176,12 +196,7 @@ export default class TodoDOM extends DivDOM {
     description.textContent = this.description;
   }
 
-  private deleteHandler() {
-    this.element.parentNode?.removeChild(this.element);
-  }
-
   public stylePriority(priority: Priority) {
-    console.log(priority);
     if (priority === "low") this.element.style.backgroundColor = `#66da66bf`;
     if (priority === "medium") this.element.style.backgroundColor = `#dab566bf`;
     if (priority === "high") this.element.style.backgroundColor = `#da6666bf`;
