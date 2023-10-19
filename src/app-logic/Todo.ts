@@ -13,22 +13,22 @@ export default class Todo extends NamedIdentifiable {
   public static from(
     inputCollection: HTMLCollectionOf<HTMLInputElement>
   ): Todo | void {
-    const arr = Array.from(inputCollection);
+    const inputArray = Array.from(inputCollection);
     let inputs: string[] = [];
     let priority: Priority = "low";
-    for (const item of arr.slice(0, 3)) {
-      if (item === arr[2]) {
+    for (const item of inputArray.slice(0, 3)) {
+      if (item === inputArray[2]) {
       }
       inputs.push(item.value);
     }
-    for (const item of arr.slice(3)) {
+    for (const item of inputArray.slice(3)) {
       if (item.checked) {
         priority =
           item.nextElementSibling?.textContent?.toLowerCase() as Priority;
       }
     }
     //Reset form
-    (arr[0].parentElement?.parentElement as HTMLFormElement).reset();
+    (inputArray[0].parentElement?.parentElement as HTMLFormElement).reset();
     return new Todo(false, inputs[0], inputs[1], new Date(inputs[2]), priority);
   }
 
